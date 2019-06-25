@@ -3,15 +3,39 @@ package com.kk.spring.boot.domain;
 import java.util.Date;
 import java.util.List;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+@Document(collection = "blog")
 public class Project {
+	@Id
+	private String id;
+	@NotBlank(message = "Blog Title Is Required")
 	private String title;
+	@NotBlank(message = "Blog Body Is Required")
 	private String body;
+	@NotBlank(message = "Blog Identifier Is Required")
+	@Size(min = 4, max = 5, message = "Please use 4 to 5 characters")
+	@Indexed(unique = true)
+	private String blogIdentifier;
+	@JsonFormat(pattern = "yyyy-mm-dd")
 	private Date date;
 	private List<String> tags;
 	private String metaDescription;
+
+	public String getBlogIdentifier() {
+		return blogIdentifier;
+	}
+
+	public void setBlogIdentifier(String blogIdentifier) {
+		this.blogIdentifier = blogIdentifier;
+	}
 
 	Project(String title, String body, Date date, List<String> tags, String metaDescription) {
 		this.title = title;
