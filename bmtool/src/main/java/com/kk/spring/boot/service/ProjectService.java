@@ -23,14 +23,23 @@ public class ProjectService {
 	}
 
 	public Project findBlogByIdentifier(String blogId) {
-		Project p = projectRespository.findByBlogIdentifier(blogId);
+		Project p = projectRespository.findByBlogIdentifier(blogId.toUpperCase());
 		if (p == null) {
 			throw new ProjectIdException("Blog ID '" + blogId + "' does not exist.");
 		}
 		return p;
 	}
 
-	public Iterable<Project> findAllProjects() {
+	public Iterable<Project> findAllBlogs() {
 		return projectRespository.findAll();
 	}
+
+	public void deleteBlogByIdentifier(String blogId) {
+		Project p = projectRespository.findByBlogIdentifier(blogId.toUpperCase());
+		if (p == null) {
+			throw new ProjectIdException("Blog ID '" + blogId + "' does not exist.");
+		}
+		projectRespository.delete(p);
+	}
+
 }
