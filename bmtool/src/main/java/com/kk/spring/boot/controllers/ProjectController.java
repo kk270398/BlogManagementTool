@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -55,5 +56,14 @@ public class ProjectController {
 	public ResponseEntity<?> deleteBlogById(@PathVariable String blogId) {
 		projectService.deleteBlogByIdentifier(blogId);
 		return new ResponseEntity<String>("Project with ID '" + blogId + "' was deleted.", HttpStatus.OK);
+	}
+
+	@PutMapping("/update")
+	public ResponseEntity<?> updateProject(@Valid @RequestBody Project p, BindingResult result) {
+		ResponseEntity<?> errorMap = mapValaidationErrorService.MapValidationService(result);
+		if (errorMap != null)
+			return errorMap;
+		Project p1 = projectService.upadteBlog(p);
+		return new ResponseEntity<Project>(p, HttpStatus.CREATED);
 	}
 }

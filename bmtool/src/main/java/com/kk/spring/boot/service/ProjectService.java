@@ -42,4 +42,13 @@ public class ProjectService {
 		projectRespository.delete(p);
 	}
 
+	public Project upadteBlog(Project p) {
+		Project p1 = projectRespository.findByBlogIdentifier(p.getBlogIdentifier());
+		if (p1 == null) {
+			throw new ProjectIdException("Blog ID '" + p.getBlogIdentifier() + "' does not exist.");
+		}
+		projectRespository.delete(p1);
+		return projectRespository.save(p);
+	}
+
 }
