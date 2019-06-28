@@ -18,6 +18,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class User implements UserDetails {
 	@Id
 	private String id;
+
 	@NotBlank(message = "Name Is Required")
 	private String name;
 	@NotBlank(message = "Username Is Required")
@@ -30,6 +31,14 @@ public class User implements UserDetails {
 	private String confirmPassword;
 
 	public User() {
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	public String getName() {
