@@ -1,11 +1,14 @@
 package com.kk.spring.boot.domain;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Reference;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -30,8 +33,11 @@ public class User implements UserDetails {
 	@Transient
 	private String confirmPassword;
 
+	//private List<Project> projects = new ArrayList<Project>();
+
 	public User() {
 	}
+
 
 	public String getId() {
 		return id;

@@ -11,6 +11,7 @@ import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Document(collection = "blog")
 public class Project {
@@ -28,6 +29,12 @@ public class Project {
 	private Date date;
 	private List<String> tags;
 	private String metaDescription;
+
+	/*
+	 * @JsonIgnore private User user;
+	 */
+
+	private String projectLeader;
 
 	public String getBlogIdentifier() {
 		return blogIdentifier;

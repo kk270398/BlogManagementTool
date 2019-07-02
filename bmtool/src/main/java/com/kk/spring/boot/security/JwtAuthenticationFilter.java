@@ -48,6 +48,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 		} catch (Exception ex) {
 			logger.error("Could not set authentication");
 		}
+		filterChain.doFilter(request, response);
+
 	}
 
 	private String getJWTFromRequest(HttpServletRequest request) {
