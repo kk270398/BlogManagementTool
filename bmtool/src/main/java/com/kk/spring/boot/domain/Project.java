@@ -36,6 +36,22 @@ public class Project {
 
 	private String projectLeader;
 
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getProjectLeader() {
+		return projectLeader;
+	}
+
+	public void setProjectLeader(String projectLeader) {
+		this.projectLeader = projectLeader;
+	}
+
 	public String getBlogIdentifier() {
 		return blogIdentifier;
 	}

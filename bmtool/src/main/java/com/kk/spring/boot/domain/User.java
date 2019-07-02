@@ -3,6 +3,7 @@ package com.kk.spring.boot.domain;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import com.kk.spring.boot.domain.Project;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;

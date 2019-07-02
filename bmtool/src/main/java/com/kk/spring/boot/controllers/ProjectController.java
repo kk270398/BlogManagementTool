@@ -1,5 +1,6 @@
 package com.kk.spring.boot.controllers;
 
+import java.security.Principal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -33,37 +34,38 @@ public class ProjectController {
 	private MapValidationErrorService mapValaidationErrorService;
 
 	@PostMapping("")
-	public ResponseEntity<?> createNewBlog(@Valid @RequestBody Project project, BindingResult result) {
+	public ResponseEntity<?> createNewBlog(@Valid @RequestBody Project project, BindingResult result,
+			Principal principal) {
 		ResponseEntity<?> errorMap = mapValaidationErrorService.MapValidationService(result);
 		if (errorMap != null)
 			return errorMap;
-		Project p = projectService.saveOrUpdateBlog(project);
+		Project p = projectService.saveOrUpdateBlog(project, principal.getName());
 		return new ResponseEntity<Project>(project, HttpStatus.CREATED);
 	}
 
 	@GetMapping("/{blogId}")
-	public ResponseEntity<?> getBlogById(@PathVariable String blogId) {
-		Project p = projectService.findBlogByIdentifier(blogId);
+	public ResponseEntity<?> getBlogById(@PathVariable String blogId, Principal principal) {
+		Project p = projectService.findBlogByIdentifier(blogId, principal.getName());
 		return new ResponseEntity<Project>(p, HttpStatus.OK);
 	}
 
 	@GetMapping("/all")
-	public Iterable<Project> getAllBlogs() {
-		return projectService.findAllBlogs();
+	public Iterable<Project> getAllBlogs(Principal p) {
+		return projectService.findAllBlogs(p.getName());
 	}
 
 	@DeleteMapping("/{blogId}")
-	public ResponseEntity<?> deleteBlogById(@PathVariable String blogId) {
-		projectService.deleteBlogByIdentifier(blogId);
+	public ResponseEntity<?> deleteBlogById(@PathVariable String blogId, Principal principal) {
+		projectService.deleteBlogByIdentifier(blogId, principal.getName());
 		return new ResponseEntity<String>("Project with ID '" + blogId + "' was deleted.", HttpStatus.OK);
 	}
 
 	@PutMapping("/update")
-	public ResponseEntity<?> updateProject(@Valid @RequestBody Project p, BindingResult result) {
+	public ResponseEntity<?> updateProject(@Valid @RequestBody Project p, BindingResult result, Principal principal) {
 		ResponseEntity<?> errorMap = mapValaidationErrorService.MapValidationService(result);
 		if (errorMap != null)
 			return errorMap;
-		Project p1 = projectService.upadteBlog(p);
+		Project p1 = projectService.upadteBlog(p, principal.getName());
 		return new ResponseEntity<Project>(p, HttpStatus.CREATED);
 	}
 }
