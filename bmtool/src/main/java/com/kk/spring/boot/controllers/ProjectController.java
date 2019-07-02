@@ -40,7 +40,7 @@ public class ProjectController {
 		if (errorMap != null)
 			return errorMap;
 		Project p = projectService.saveOrUpdateBlog(project, principal.getName());
-		return new ResponseEntity<Project>(project, HttpStatus.CREATED);
+		return new ResponseEntity<Project>(p, HttpStatus.CREATED);
 	}
 
 	@GetMapping("/{blogId}")

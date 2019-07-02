@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { createProject } from "../../actions/projectActions";
+import classnames from "classnames";
 
 class AddProject extends Component {
   constructor() {
@@ -11,10 +12,16 @@ class AddProject extends Component {
       body: "",
       blogIdentifier: "",
       metaDescription: "",
-      date: ""
+      date: "",
+      errors:{}
     };
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+  }
+  componentWillReceiveProps(nextProps){
+    if(nextProps.errors){
+      this.setState({ errors: nextProps.errors});
+    }
   }
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
@@ -34,7 +41,9 @@ class AddProject extends Component {
     let styles = {
       margin: "10px"
     };
+    const {errors} =this.state;
     return (
+      <div>
       <div className="project" style={styles}>
         <div className="container">
           <div className="row">
@@ -45,32 +54,53 @@ class AddProject extends Component {
                 <div className="form-group">
                   <input
                     type="text"
-                    className="form-control form-control-lg "
+                    className={classnames("form-control form-control-lg", {
+                    "is-invalid":errors.title
+                    })}
                     placeholder="Blog Title"
                     name="title"
                     value={this.state.title}
                     onChange={this.onChange}
                   />
+                  {errors.title && (
+                    <div className="invalid-feedback">
+                      {errors.title}
+                      </div>
+                  )}
                 </div>
                 <div className="form-group">
                   <input
                     type="text"
-                    className="form-control form-control-lg"
+                    className={classnames("form-control form-control-lg", {
+                      "is-invalid":errors.blogIdentifier
+                      })}
                     placeholder="Unique Blog ID"
                     name="blogIdentifier"
                     value={this.state.blogIdentifier}
                     onChange={this.onChange}
                   />
+                  {errors.blogIdentifier && (
+                    <div className="invalid-feedback">
+                      {errors.blogIdentifier}
+                      </div>
+                  )}
                 </div>
                 <div className="form-group">
                   <textarea
                     rows="10"
-                    className="form-control form-control-lg"
+                    className={classnames("form-control form-control-lg", {
+                      "is-invalid":errors.body
+                      })}
                     placeholder="Body"
                     name="body"
                     value={this.state.body}
                     onChange={this.onChange}
                   />
+                  {errors.body && (
+                    <div className="invalid-feedback">
+                      {errors.body}
+                      </div>
+                  )}
                 </div>
                 <div className="form-group">
                   <textarea
@@ -100,14 +130,20 @@ class AddProject extends Component {
           </div>
         </div>
       </div>
+      </div>
     );
   }
 }
 AddProject.propTypes = {
-  createProject: PropTypes.func.isRequired
+  createProject: PropTypes.func.isRequired,
+  errors: PropTypes.object.isRequired
 };
 
+const mapStateToProps =state =>({
+  errors:state.errors
+})
+
 export default connect(
-  null,
+  mapStateToProps,
   { createProject }
 )(AddProject);
