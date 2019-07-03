@@ -1,18 +1,18 @@
 package com.kk.spring.boot.exceptions;
 
 public class ProjectIdExceptionResponse {
-	private String projectIdentifier;
+	private String blogIdentifier;
 
-	public ProjectIdExceptionResponse(String projectIdentifier) {
-		this.projectIdentifier = projectIdentifier;
+	public ProjectIdExceptionResponse(String blogIdentifier) {
+		this.blogIdentifier = blogIdentifier;
 	}
 
-	public String getProjectIdentifier() {
-		return projectIdentifier;
+	public String getBlogIdentifier() {
+		return blogIdentifier;
 	}
 
-	public void setProjectIdentifier(String projectIdentifier) {
-		this.projectIdentifier = projectIdentifier;
+	public void setBlogIdentifier(String blogIdentifier) {
+		this.blogIdentifier = blogIdentifier;
 	}
 
 }
