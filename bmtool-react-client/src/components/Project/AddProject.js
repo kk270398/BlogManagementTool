@@ -13,14 +13,14 @@ class AddProject extends Component {
       blogIdentifier: "",
       metaDescription: "",
       date: "",
-      errors:{}
+      errors: {}
     };
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
   }
-  componentWillReceiveProps(nextProps){
-    if(nextProps.errors){
-      this.setState({ errors: nextProps.errors});
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.errors) {
+      this.setState({ errors: nextProps.errors });
     }
   }
   onChange(e) {
@@ -41,95 +41,91 @@ class AddProject extends Component {
     let styles = {
       margin: "10px"
     };
-    const {errors} =this.state;
+    const { errors } = this.state;
     return (
       <div>
-      <div className="project" style={styles}>
-        <div className="container">
-          <div className="row">
-            <div className="col-md-8 m-auto">
-              <h5 className="display-4 text-center">Create / Edit Blog</h5>
-              <hr />
-              <form onSubmit={this.onSubmit}>
-                <div className="form-group">
-                  <input
-                    type="text"
-                    className={classnames("form-control form-control-lg", {
-                    "is-invalid":errors.title
-                    })}
-                    placeholder="Blog Title"
-                    name="title"
-                    value={this.state.title}
-                    onChange={this.onChange}
-                  />
-                  {errors.title && (
-                    <div className="invalid-feedback">
-                      {errors.title}
-                      </div>
-                  )}
-                </div>
-                <div className="form-group">
-                  <input
-                    type="text"
-                    className={classnames("form-control form-control-lg", {
-                      "is-invalid":errors.blogIdentifier
+        <div className="project" style={styles}>
+          <div className="container">
+            <div className="row">
+              <div className="col-md-8 m-auto">
+                <h5 className="display-4 text-center">Create Edit Blog Post</h5>
+                <hr />
+                <form onSubmit={this.onSubmit}>
+                  <div className="form-group">
+                    <input
+                      type="text"
+                      className={classnames("form-control form-control-lg", {
+                        "is-invalid": errors.title
                       })}
-                    placeholder="Unique Blog ID"
-                    name="blogIdentifier"
-                    value={this.state.blogIdentifier}
-                    onChange={this.onChange}
-                  />
-                  {errors.blogIdentifier && (
-                    <div className="invalid-feedback">
-                      {errors.blogIdentifier}
-                      </div>
-                  )}
-                </div>
-                <div className="form-group">
-                  <textarea
-                    rows="10"
-                    className={classnames("form-control form-control-lg", {
-                      "is-invalid":errors.body
+                      placeholder="Blog Title"
+                      name="title"
+                      value={this.state.title}
+                      onChange={this.onChange}
+                    />
+                    {errors.title && (
+                      <div className="invalid-feedback">{errors.title}</div>
+                    )}
+                  </div>
+                  <div className="form-group">
+                    <input
+                      type="text"
+                      className={classnames("form-control form-control-lg", {
+                        "is-invalid": errors.blogIdentifier
                       })}
-                    placeholder="Body"
-                    name="body"
-                    value={this.state.body}
-                    onChange={this.onChange}
-                  />
-                  {errors.body && (
-                    <div className="invalid-feedback">
-                      {errors.body}
+                      placeholder="Unique Blog ID"
+                      name="blogIdentifier"
+                      value={this.state.blogIdentifier}
+                      onChange={this.onChange}
+                    />
+                    {errors.blogIdentifier && (
+                      <div className="invalid-feedback">
+                        {errors.blogIdentifier}
                       </div>
-                  )}
-                </div>
-                <div className="form-group">
-                  <textarea
-                    className="form-control form-control-lg"
-                    placeholder="Meta Description"
-                    name="metaDescription"
-                    value={this.state.metaDescription}
-                    onChange={this.onChange}
-                  />
-                </div>
-                <h6>Date</h6>
-                <div className="form-group">
+                    )}
+                  </div>
+                  <div className="form-group">
+                    <textarea
+                      rows="10"
+                      className={classnames("form-control form-control-lg", {
+                        "is-invalid": errors.body
+                      })}
+                      placeholder="Body"
+                      name="body"
+                      value={this.state.body}
+                      onChange={this.onChange}
+                    />
+                    {errors.body && (
+                      <div className="invalid-feedback">{errors.body}</div>
+                    )}
+                  </div>
+                  <div className="form-group">
+                    <textarea
+                      className="form-control form-control-lg"
+                      placeholder="Meta Description"
+                      name="metaDescription"
+                      value={this.state.metaDescription}
+                      onChange={this.onChange}
+                    />
+                  </div>
+                  <h6>Date</h6>
+                  <div className="form-group">
+                    <input
+                      type="date"
+                      className="form-control form-control-lg"
+                      name="date"
+                      value={this.state.date}
+                      onChange={this.onChange}
+                    />
+                  </div>
                   <input
-                    type="date"
-                    className="form-control form-control-lg"
-                    name="date"
-                    value={this.state.date}
-                    onChange={this.onChange}
+                    type="submit"
+                    className="btn btn-primary btn-block mt-4"
                   />
-                </div>
-                <input
-                  type="submit"
-                  className="btn btn-primary btn-block mt-4"
-                />
-              </form>
+                </form>
+              </div>
             </div>
           </div>
         </div>
-      </div>
       </div>
     );
   }
@@ -139,9 +135,9 @@ AddProject.propTypes = {
   errors: PropTypes.object.isRequired
 };
 
-const mapStateToProps =state =>({
-  errors:state.errors
-})
+const mapStateToProps = state => ({
+  errors: state.errors
+});
 
 export default connect(
   mapStateToProps,
