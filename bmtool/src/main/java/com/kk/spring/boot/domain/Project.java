@@ -26,7 +26,7 @@ public class Project {
 	@Indexed(unique = true)
 	private String blogIdentifier;
 	@JsonFormat(pattern = "yyyy-mm-dd")
-	private Date date;
+	private String date;
 	private List<String> tags;
 	private String metaDescription;
 
@@ -60,7 +60,7 @@ public class Project {
 		this.blogIdentifier = blogIdentifier;
 	}
 
-	Project(String title, String body, Date date, List<String> tags, String metaDescription) {
+	Project(String title, String body, String date, List<String> tags, String metaDescription) {
 		this.title = title;
 		this.body = body;
 		this.date = date;
@@ -92,11 +92,11 @@ public class Project {
 		this.body = body;
 	}
 
-	public Date getDate() {
+	public String getDate() {
 		return date;
 	}
 
-	public void setDate(Date date) {
+	public void setDate(String date) {
 		this.date = date;
 	}
 
